@@ -12,7 +12,8 @@
                 <VerticalStackLayout Grid.Row="0" Spacing="10">
                     <Label Text="QuizEn" FontSize="32" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}" Margin="0, 10, 0, 30"/>
                     <Button Text="🏠 Главная" FontFamily="SegoeUIVF" BackgroundColor="{StaticResource PrimaryColor}" CornerRadius="12" TextColor="{StaticResource TextPrimary}"/>
-                    <Button Text="⭐ Избранное" FontFamily="SegoeUIVF" BackgroundColor="Transparent" CornerRadius="12" TextColor="{StaticResource TextTernary}" Clicked="OnFavoritesClicked"/> 
+                    <Button Text="📚 Карточки" FontFamily="SegoeUIVF" BackgroundColor="Transparent" CornerRadius="12" TextColor="{StaticResource TextTernary}"/>
+                    <Button Text="⭐ Избранное" FontFamily="SegoeUIVF" BackgroundColor="Transparent" CornerRadius="12" TextColor="{StaticResource TextTernary}" Command="{Binding NavigateToFavoritesCommand}"/> 
                     <Button Text="📈 Статистика" FontFamily="SegoeUIVF" BackgroundColor="Transparent" CornerRadius="12" TextColor="{StaticResource TextTernary}"/>
                 </VerticalStackLayout>
 
@@ -40,53 +41,48 @@
 
                 <Border BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" Padding="20">
 
-                    <VerticalStackLayout>
-                        <Label Text="Ежедневная цель" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}"/>
-                        <ProgressBar Progress="0.75" ProgressColor="{StaticResource Progress}" Margin="0,12,0,0"/>
-                        <Label Text="75% completed" TextColor="{StaticResource TextSecondary}" FontFamily="SegoeUIVF"/>
+                    <VerticalStackLayout Spacing="10">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Ежедневная цель" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}"/>
+                            <Label Grid.Column="1" Text="{Binding DailyGoalPercent}" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
+                        </Grid>
+                        
+                        <ProgressBar Progress="{Binding DailyGoalProgress}" ProgressColor="{StaticResource Progress}" Margin="0,12,0,0"/>
+                        <Label Text="{Binding DailyGoalText}" TextColor="{StaticResource TextSecondary}" FontFamily="SegoeUIVF"/>
                     </VerticalStackLayout>
                 </Border>
                 
                 <Grid ColumnDefinitions="*,*,*" ColumnSpacing="20">
                     <Border Grid.Column="0" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" Padding="20">
                         <VerticalStackLayout>
-                            <Label Text="1240" FontSize="32" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}"/>
+                            <Label Text="{Binding LearnedWords}" FontSize="32" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}"/>
                             <Label Text="Слов изученно" TextColor="{StaticResource TextSecondary}" FontFamily="SegoeUIVF"/>
                         </VerticalStackLayout>
                     </Border>
                     
                     <Border Grid.Column="1" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" Padding="20">
                         <VerticalStackLayout>
-                            <Label Text="19" FontSize="32" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}"/>
+                            <Label Text="{Binding StudyStreak}" FontSize="32" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}"/>
                             <Label Text="Дней серии" TextColor="{StaticResource TextSecondary}"/>
                         </VerticalStackLayout>
                     </Border>
 
                     <Border Grid.Column="2" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" Padding="20"> 
                         <VerticalStackLayout> 
-                            <Label Text="729" FontSize="32" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}"/>
+                            <Label Text="{Binding CompletedCards}" FontSize="32" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}"/>
                             <Label Text="Сделанно карточек" TextColor="{StaticResource TextSecondary}"/>
                         </VerticalStackLayout>
                     </Border>
                 </Grid>
 
-                <CollectionView>
-                    <CollectionView.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Business English</x:String>
-                            <x:String>Travel Vocabulary</x:String>
-                            <x:String>IT English</x:String>
-                            <x:String>Daily Conversation</x:String>
-                        </x:Array>
-                    </CollectionView.ItemsSource>
-
+                <CollectionView ItemsSource="{Binding Decks}" SelectionMode="None">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Border Margin="0,0,0,15" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" Padding="20" StrokeShape="RoundRectangle 10">
                                 <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
-                                    <Label Text="{Binding .}" FontSize="22" FontAttributes="Bold" FontFamily="SegoeUIVF"  TextColor="{StaticResource PrimaryColor}"/>
-                                    <Label Grid.Row="1" Text="356 карточек" TextColor="{StaticResource TextSecondary}" FontFamily="SegoeUIVF"/>
-                                    <Button Grid.Column="1" Text="Изучать" BackgroundColor="{StaticResource PrimaryColor}" TextColor="{StaticResource TextPrimary}" CornerRadius="10"/>
+                                    <Label Text="{Binding Name}" FontSize="22" FontAttributes="Bold" FontFamily="SegoeUIVF"  TextColor="{StaticResource PrimaryColor}"/>
+                                    <Label Grid.Row="1" Text="Binding Description" TextColor="{StaticResource TextSecondary}" FontFamily="SegoeUIVF"/>
+                                    <Button Grid.Column="1" Text="Изучать" BackgroundColor="{StaticResource PrimaryColor}" TextColor="{StaticResource TextPrimary}" CornerRadius="10" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.StudyDeckCommand}" CommandParameter="{Binding .}"/>
                                 </Grid>
                             </Border>
                         </DataTemplate>

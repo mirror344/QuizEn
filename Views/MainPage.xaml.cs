@@ -1,19 +1,14 @@
-﻿using Microsoft.Maui.Controls;
-using QuizEn.Views;
+﻿using QuizEn.ViewModels;
 
 namespace QuizEn.Views;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage()
-	{
-		InitializeComponent();
-	}
+    public MainPage()
+    {
+        InitializeComponent();
 
-	private async void OnFavoritesClicked(object sender, EventArgs e)
-	{
-		await Shell.Current.GoToAsync(nameof(FavoritesPage));
-	}
-
-
+        BindingContext = new MainViewModel();
+    }
 }
+
