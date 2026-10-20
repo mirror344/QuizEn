@@ -12,7 +12,7 @@
                 <VerticalStackLayout Grid.Row="0" Spacing="10">
                     <Label Text="QuizEn" FontSize="32" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}" Margin="0, 10, 0, 30"/>
                     <Button Text="🏠 Главная" FontFamily="SegoeUIVF" BackgroundColor="{StaticResource PrimaryColor}" CornerRadius="12" TextColor="{StaticResource TextPrimary}"/>
-                    <Button Text="📚 Карточки" FontFamily="SegoeUIVF" BackgroundColor="Transparent" CornerRadius="12" TextColor="{StaticResource TextTernary}"/>
+                    <Button Text="📚 Карточки" FontFamily="SegoeUIVF" BackgroundColor="Transparent" CornerRadius="12" TextColor="{StaticResource TextTernary}" Command="{Binding NavigateToCardsCommand}"/>
                     <Button Text="⭐ Избранное" FontFamily="SegoeUIVF" BackgroundColor="Transparent" CornerRadius="12" TextColor="{StaticResource TextTernary}" Command="{Binding NavigateToFavoritesCommand}"/> 
                     <Button Text="📈 Статистика" FontFamily="SegoeUIVF" BackgroundColor="Transparent" CornerRadius="12" TextColor="{StaticResource TextTernary}"/>
                 </VerticalStackLayout>

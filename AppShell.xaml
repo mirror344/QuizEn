@@ -20,4 +20,9 @@
         ContentTemplate="{DataTemplate views:FavoritesPage}"
         Route="FavoritesPage" />
 
+    <ShellContent
+        Title="Карточки"
+        ContentTemplate="{DataTemplate views:CardsPage}"
+        Route="CardsPage" />
+
 </Shell>

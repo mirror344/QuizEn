@@ -7,7 +7,7 @@
 
     <Grid RowDefinitions="Auto,*" Padding="24,20" RowSpacing="22">
         <VerticalStackLayout Grid.Row="0" Spacing="18">
-            <Button Text="← Назад" HorizontalOptions="Start" BackgroundColor="Transparent" TextColor="{StaticResource TextSecondary}" Clicked="OnBackClicked" />
+        <Button Text="🔙 Назад" HorizontalOptions="Start" BackgroundColor="Transparent" TextColor="{StaticResource TextSecondary}" Clicked="OnBackClicked" />
             <Grid ColumnDefinitions="*,Auto">
                 <VerticalStackLayout Spacing="5">
                     <Label Text="Твоя коллекция" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}"/>
@@ -18,11 +18,8 @@
                     <Label Text="{Binding FavoritesCount, StringFormat='{0} слов'}" FontSize="18"  FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}" />
                 </Border>
             </Grid>
-            <Border BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="1" Padding="20">
-                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-                    <SearchBar Grid.Column="1" Placeholder="Найти слово или перевод..." PlaceholderColor="{StaticResource SurfaceColor}" TextColor="{StaticResource TextSecondary}" Background="Transparent" CancelButtonColor="#FF9A1414" Text="{Binding SearchText}" HeightRequest="52"/>
-                </Grid>
-            </Border>
+            <SearchBar Placeholder="Найти слово или перевод..." PlaceholderColor="{StaticResource TextPrimary}" TextColor="{StaticResource TextSecondary}" Background="{StaticResource SurfaceColor}" CancelButtonColor="#FF9A1414" Text="{Binding SearchText}" HeightRequest="52"/>
+            
 
             <Label Text="Сохранённые слова" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}" />
         </VerticalStackLayout>

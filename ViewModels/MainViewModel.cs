@@ -57,6 +57,7 @@ public class MainViewModel : INotifyPropertyChanged
         $"{DailyGoalProgress:P0}";
 
     public ICommand NavigateToFavoritesCommand { get; }
+    public ICommand NavigateToCardsCommand { get; }
 
     public ICommand StudyDeckCommand { get; }
 
@@ -66,7 +67,12 @@ public class MainViewModel : INotifyPropertyChanged
 
         NavigateToFavoritesCommand = new Command(
             async () => await Shell.Current.GoToAsync(
-                nameof(FavoritesPage)));
+                nameof(FavoritesPage)
+            ));
+        NavigateToCardsCommand = new Command(
+            async () => await Shell.Current.GoToAsync(
+                nameof(CardsPage)    
+            ));
 
         StudyDeckCommand = new Command<Deck>(
             async deck => await OpenDeck(deck));

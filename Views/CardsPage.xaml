@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuizEn.Views.CardsPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+    <Grid RowDefinitions="Auto,*" Padding="32, 24" RowSpacing="24"> 
+        <VerticalStackLayout Grid.Row="0" Spacing="18">
+            <Button Text="🔙 Назад" HorizontalOptions="Start" BackgroundColor="Transparent" TextColor="{StaticResource TextSecondary}" Clicked="OnBackClicked" />
+            <Grid ColumnDefinitions="*,Auto"> 
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Твой словарь" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}"/>
+                    <Label Text="Карточки" FontSize="34" FontFamily="SegoeUIVF" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}"/>
+                </VerticalStackLayout>
+                <Button Grid.Column="1" Text="➕ Добавить" FontSize="18" FontFamily="SegoeUIVF" BackgroundColor="{StaticResource PrimaryColor}" TextColor="{StaticResource TextPrimary}" CornerRadius="12" Padding="18,12" VerticalOptions="Center" Command="{Binding AddCardCommand}"/>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="14">
+                <Border Grid.Column="0" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" Padding="16">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Всего" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}"/>
+                        <Label Text="{Binding TotalCards}" FontSize="18" FontFamily="SegoeUIVF" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Column="1" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" Padding="16">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Изучено" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}"/>
+                        <Label Text="{Binding LearnedCards}" FontSize="18" FontFamily="SegoeUIVF" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Column="2" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" Padding="10">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Повторить" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}"/>
+                        <Label Text="{Binding CardsToRepeat}" FontSize="18" FontFamily="SegoeUIVF" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}"/>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            
+            <SearchBar Placeholder="Найти слово или перевод..." PlaceholderColor="{StaticResource TextPrimary}" TextColor="{StaticResource TextSecondary}" Background="{StaticResource SurfaceColor}" CancelButtonColor="#FF9A1414" Text="{Binding SearchText}" HeightRequest="52"/>
+            
+
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                <Picker Title="Все карточки" ItemsSource="{Binding DeckNames}" SelectedItem="{Binding SelectedDeck}" TextColor="{StaticResource TextPrimary}" TitleColor="{StaticResource PrimaryColor}" BackgroundColor="{StaticResource SurfaceColor}"/>
+                <Button Grid.Column="1" Text="Сбросить" BackgroundColor="Transparent" TextColor="{StaticResource PrimaryColor}" Command="{Binding ResetFiltersCommand}"/>
+            </Grid>
+
+            <Label Text="Список слов" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}"/>
+
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Cards}" SelectionMode="None">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Spacing="12" Padding="24" VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label Text="📚" FontSize="34" HorizontalOptions="Center"/>
+                    <Label Text="Карточки не найдены" FontSize="18" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}" HorizontalTextAlignment="Center"/>
+                    <Label Text="Добавь новое слово или измени поиск" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}" HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,0,0,12" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" Padding="18">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                            <VerticalStackLayout Spacing="8" VerticalOptions="Center">
+                                <Label Text="{Binding Word}" FontSize="18" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource PrimaryColor}"/>
+                                <Label Text="{Binding Translation}" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}"/>
+                                <Label Text="{Binding Example}" FontSize="14" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}"/>
+
+                                <Border BackgroundColor="#334155" StrokeThickness="0" Padding="8,4" HorizontalOptions="Start">
+                                    <Label Text="{Binding DeckName}" FontSize="12" TextColor="{StaticResource TextPrimary}"/>
+                                </Border>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="8" VerticalOptions="Center">
+                                <Button Text="Изучить" FontSize="14" BackgroundColor="{StaticResource PrimaryColor}" TextColor="{StaticResource TextPrimary}" CornerRadius="10" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.StudyCardCommand}" CommandParameter="{Binding .}"/>
+                                <Button Text="⭐" FontSize="14" BackgroundColor="Transparent" TextColor="{StaticResource TextPrimary}" CornerRadius="10" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ToggleFavoriteCommand}" CommandParameter="{Binding .}"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>
