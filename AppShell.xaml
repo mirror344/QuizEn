@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="QuizEn.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:QuizEn"
+    xmlns:views="clr-namespace:QuizEn.Views"
+    FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False"
+    Shell.BackgroundColor="#111318"
+    Shell.ForegroundColor="#F0A34A">
+
+    <ShellContent
+        Title="Главная"
+        ContentTemplate="{DataTemplate views:MainPage}" 
+        Route="MainPage" />
+        
+    <ShellContent
+        Title="Избранное"
+        ContentTemplate="{DataTemplate views:FavoritesPage}"
+        Route="FavoritesPage" />
+
+</Shell>

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuizEn.Views.MainPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+     <Grid ColumnDefinitions="260,*">
+        
+        <Border Grid.Column="0" BackgroundColor="{StaticResource SidebarColor}" StrokeThickness="0" Padding="20">         
+            <Grid RowDefinitions="Auto, *, Auto">
+                <VerticalStackLayout Grid.Row="0" Spacing="10">
+                    <Label Text="QuizEn" FontSize="32" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}" Margin="0, 10, 0, 30"/>
+                    <Button Text="🏠 Главная" FontFamily="SegoeUIVF" BackgroundColor="{StaticResource PrimaryColor}" CornerRadius="12" TextColor="{StaticResource TextPrimary}"/>
+                    <Button Text="⭐ Избранное" FontFamily="SegoeUIVF" BackgroundColor="Transparent" CornerRadius="12" TextColor="{StaticResource TextTernary}" Clicked="OnFavoritesClicked"/> 
+                    <Button Text="📈 Статистика" FontFamily="SegoeUIVF" BackgroundColor="Transparent" CornerRadius="12" TextColor="{StaticResource TextTernary}"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Row="2">
+                    <Button Text="⚙️ Настройки" FontFamily="SegoeUIVF" BackgroundColor="Transparent" CornerRadius="12" TextColor="{StaticResource TextTernary}"/>
+                </VerticalStackLayout>
+                
+            </Grid>
+        </Border>  
+
+
+        <ScrollView Grid.Column="1">
+            <VerticalStackLayout Padding="40" Spacing="20">
+                <Grid ColumnDefinitions="*, Auto">
+
+                    <VerticalStackLayout>
+                        <Label Text="C возвращением 👋" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}"/>
+                        <Label Text="Готовы учиться?" FontSize="34" FontFamily="SegoeUIVF" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}"/>
+                    </VerticalStackLayout>
+
+                    <Border WidthRequest="50" HeightRequest="50" BackgroundColor="#334155" StrokeThickness="0" StrokeShape="RoundRectangle 25" HorizontalOptions="End">
+                        <Label Text="👤" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Border>
+                </Grid>
+
+                <Border BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" Padding="20">
+
+                    <VerticalStackLayout>
+                        <Label Text="Ежедневная цель" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}"/>
+                        <ProgressBar Progress="0.75" ProgressColor="{StaticResource Progress}" Margin="0,12,0,0"/>
+                        <Label Text="75% completed" TextColor="{StaticResource TextSecondary}" FontFamily="SegoeUIVF"/>
+                    </VerticalStackLayout>
+                </Border>
+                
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="20">
+                    <Border Grid.Column="0" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" Padding="20">
+                        <VerticalStackLayout>
+                            <Label Text="1240" FontSize="32" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}"/>
+                            <Label Text="Слов изученно" TextColor="{StaticResource TextSecondary}" FontFamily="SegoeUIVF"/>
+                        </VerticalStackLayout>
+                    </Border>
+                    
+                    <Border Grid.Column="1" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" Padding="20">
+                        <VerticalStackLayout>
+                            <Label Text="19" FontSize="32" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}"/>
+                            <Label Text="Дней серии" TextColor="{StaticResource TextSecondary}"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="2" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" Padding="20"> 
+                        <VerticalStackLayout> 
+                            <Label Text="729" FontSize="32" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}"/>
+                            <Label Text="Сделанно карточек" TextColor="{StaticResource TextSecondary}"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <CollectionView>
+                    <CollectionView.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Business English</x:String>
+                            <x:String>Travel Vocabulary</x:String>
+                            <x:String>IT English</x:String>
+                            <x:String>Daily Conversation</x:String>
+                        </x:Array>
+                    </CollectionView.ItemsSource>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="0,0,0,15" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" Padding="20" StrokeShape="RoundRectangle 10">
+                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                                    <Label Text="{Binding .}" FontSize="22" FontAttributes="Bold" FontFamily="SegoeUIVF"  TextColor="{StaticResource PrimaryColor}"/>
+                                    <Label Grid.Row="1" Text="356 карточек" TextColor="{StaticResource TextSecondary}" FontFamily="SegoeUIVF"/>
+                                    <Button Grid.Column="1" Text="Изучать" BackgroundColor="{StaticResource PrimaryColor}" TextColor="{StaticResource TextPrimary}" CornerRadius="10"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>  
+    </Grid>
+</ContentPage>

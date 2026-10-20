@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuizEn.Views.FavoritesPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+    <Grid RowDefinitions="Auto,*" Padding="24,20" RowSpacing="22">
+        <VerticalStackLayout Grid.Row="0" Spacing="18">
+            <Button Text="← Назад" HorizontalOptions="Start" BackgroundColor="Transparent" TextColor="{StaticResource TextSecondary}" Clicked="OnBackClicked" />
+            <Grid ColumnDefinitions="*,Auto">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Твоя коллекция" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}"/>
+                    <Label Text="Избранное" FontSize="34" FontFamily="SegoeUIVF" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}"/>
+                </VerticalStackLayout>
+
+                <Border Grid.Column="1" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" Padding="20">
+                    <Label Text="{Binding FavoritesCount, StringFormat='{0} слов'}" FontSize="18"  FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}" />
+                </Border>
+            </Grid>
+            <Border BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="1" Padding="20">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                    <SearchBar Grid.Column="1" Placeholder="Найти слово или перевод..." PlaceholderColor="{StaticResource SurfaceColor}" TextColor="{StaticResource TextSecondary}" Background="Transparent" CancelButtonColor="#FF9A1414" Text="{Binding SearchText}" HeightRequest="52"/>
+                </Grid>
+            </Border>
+
+            <Label Text="Сохранённые слова" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextPrimary}" />
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Favorites}" SelectionMode="None">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="20" Spacing="12" VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label Text="⭐" FontSize="32" HorizontalTextAlignment="Center"/>
+                    <Label Text="Здесь пока пусто" FontSize="18" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}" HorizontalTextAlignment="Center" />
+                    <Label Text="Добавляй понравившиеся слова в избранное" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}" HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+        
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,0,0,15" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="1" Padding="20" StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout Spacing="12">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <VerticalStackLayout Spacing="5">
+                                    <Label Text="{Binding Word}" FontSize="18" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}"/>
+                                    <Label Text="{Binding Translation}" FontSize="18" FontAttributes="Bold" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}"/>
+                                </VerticalStackLayout>
+
+                                <Button Grid.Column="1" Text="❌" FontSize="18" BackgroundColor="{StaticResource SurfaceColor}" WidthRequest="42" HeightRequest="42" Padding="0" CornerRadius="12" VerticalOptions="Start" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.RemoveFavoriteCommand}" CommandParameter="{Binding .}" />
+                            </Grid>
+
+                            <BoxView HeightRequest="1" Color="{StaticResource SurfaceColor}"/>
+                            <Label Text="Пример" FontSize="14" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}"/>
+                            <Label Text="{Binding Example}" FontSize="14" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}"/>
+
+                            <Border BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" Padding="10,6" HorizontalOptions="Start">
+                                <Label Text="{Binding DeckName}" FontSize="18" FontFamily="SegoeUIVF" TextColor="{StaticResource TextSecondary}"/>
+                            </Border>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>   
+    </Grid>
+</ContentPage>             
